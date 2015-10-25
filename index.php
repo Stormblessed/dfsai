@@ -9,6 +9,7 @@
     <title>DFS AI</title>
     
     <link rel="stylesheet" type="text/css" href="css/index.css"/>
+    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
     <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,500,700' rel='stylesheet' type='text/css'/>
 </head>
 
@@ -18,13 +19,31 @@
         </div>
         <div id="main_content">
         	<div id="main_search">
-            	
+            	<a href="#menu" id="main_menu_toggle"><i class="fa fa-bars"></i></a>
+                <div id="search_bar">
+                	<input id="search_bar_input" name="search_input" type="text" placeholder="Search Fantasy Player"/>
+                </div>
             </div>
             <div id="main_profile">
-            	<div id="player_name">
+            	<div id="profile_primary_stats">
+                    <div id="player_name">
+                    	Tom Brady
+                    </div>
+                    <div id="player_number">
+                    	#12
+                    </div>
+                    <div id="player_position">
+                    	QB
+                    </div>
+                    <div id="player_simple_score">
+                    	7.12
+                    </div>
+               	</div>
+                <div id="profile_secondary_stats">
                 </div>
             </div>
             <div id="fantasy_stats">
+            	<div id="fantasy_score_chart"></div>
             </div>
             <div id="real_stats">
             </div>

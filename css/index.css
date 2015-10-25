@@ -1,5 +1,167 @@
 @charset "utf-8";
 /* CSS Document */
 
+html, html a
+{
+	text-rendering: optimizeLegibility !important;
+	-webkit-font-smoothing: antialiased !important;
+	text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+}
+
+body
+{
+	margin: 0 auto;
+	padding: 0 auto;
+	font-family: 'Ubuntu', sans-serif;
+}
+
+#site
+{
+	float: left;
+	width: 100%;
+	height: 100%;
+}
+
+#main_menu
+{
+	float: left;
+	display: none;
+}
+
+#main_content
+{
+	width: 98%;
+	margin: 0 auto;
+	display: block;
+}
+
+#main_search
+{
+	float: left;
+	width: 100%;
+	height: 50px;
+	border-bottom: 1px solid #999;
+	opacity: 0.7;
+	display: table;
+}
+
+#main_menu_toggle
+{
+	float: left;
+	width: 5%;
+	font-size: 50px;
+	height: 50px;
+	text-decoration: none;
+	color: black;
+	text-align: center;
+	vertical-align: middle;
+	padding-left: 2%;
+	padding-right: 1%;
+	padding-top: 2%;
+	padding-bottom: 2%;
+}
+
+#main_menu_toggle:hover
+{
+	opacity: 0.8;
+}
+
+#main_menu_toggle:active
+{
+	opacity: 0.5;
+}
+
+#search_bar
+{
+	float: left;
+	display: table-cell;
+	width: 83%;
+	height: 125px;
+	font-size: 35px;
+	padding-left: 2%;
+	padding-right: 2%;
+}
+
+#search_bar_input
+{
+	float: left;
+	border: none;
+	width: 100%;
+	height: 100%;
+	font-size: inherit;
+	background-color: transparent;
+}
+
+#search_bar_input:focus
+{
+	outline: none;
+}
+
+#main_profile
+{
+	float: left;
+	width: 100%;
+}
+
+#profile_primary_stats
+{
+	float: left;
+	width: inherit;
+}
+
+#profile_secondary_stats
+{
+	float: left;
+	width: inherit;
+}
+
+#player_name
+{
+	float: left;
+	font-size: 28px;
+	width: 50%;
+}
+
+#player_number
+{
+	float: left;
+	width: 10%;
+	color: gray;
+}
+
+#player_position
+{
+	float: left;
+	width: 10%;
+	color: gray;
+}
+
+#player_simple_score
+{
+	float: left;
+	width: 10%;
+	color: gray;
+}
+
+#fantasy_stats
+{
+	float: left;
+}
+
+#fantasy_score_chart
+{
+	float: left;
+}
+
+#real_stats
+{
+	float: left;
+}
+
+#schedule
+{
+	float: left;
+}
+
 
 
