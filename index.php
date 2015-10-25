@@ -1,5 +1,5 @@
 <?php
-	
+	require_once('processes/connect.php')
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -18,8 +18,11 @@
         </div>
         <div id="main_content">
         	<div id="main_search">
+            	
             </div>
             <div id="main_profile">
+            	<div id="player_name">
+                </div>
             </div>
             <div id="fantasy_stats">
             </div>
