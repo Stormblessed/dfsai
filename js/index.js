@@ -9,6 +9,11 @@ $(document).ready(function()
 		if($('#search_bar_input').val().length > 3) LoadPlayerSuggestionsList();
 		else $("#search_bar_suggestions").hide();
 	});
+	
+	$("#main_menu_toggle").on("click", function()
+	{
+		$("#site").toggleClass("pushed");
+	});
 });
 
 function LoadPlayerSuggestionsList()

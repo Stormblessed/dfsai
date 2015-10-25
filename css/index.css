@@ -13,20 +13,39 @@ body
 	margin: 0 auto;
 	padding: 0 auto;
 	font-family: 'Ubuntu', sans-serif;
+	overflow-x: hidden;
 }
 
 #site
 {
-	float: left;
-	width: 100vw;
-	height: 100vh;
 	background-color: #EEEEEE;
+	min-width: 100vw;
+    min-height: 100vh;
+	
+    position: relative;
+    top: 0;
+    bottom: 100%;
+    left: 0;
+    z-index: 1;
+	
+	transition: left 0.2s;
+}
+
+.pushed
+{
+	left: 20vw !important;
 }
 
 #main_menu
-{
-	display: none;
-	display: none;
+{	
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
 	background-color: #454545;
 }
 
