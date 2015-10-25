@@ -30,9 +30,25 @@ body
 
 #main_content
 {
-	width: 98%;
+	width: 100%;
 	margin: 0 auto;
 	display: block;
+}
+
+#content_blocks
+{
+	width: 92%;
+	margin: 0 auto;
+}
+
+.content_block
+{
+	width: 100%;
+	min-height: 2vh;
+	background-color: #EBEBEB;
+	margin-top: 1vh;
+	margin-bottom: 1vh;
+	border-radius: 15px;
 }
 
 #main_search
@@ -45,10 +61,16 @@ body
 	display: table;
 }
 
+#menu_toggle_wrapper
+{
+	vertical-align: middle;
+	display: table-cell;
+}
+
 #main_menu_toggle
 {
 	float: left;
-	width: 5%;
+	width: 100%;
 	font-size: 50px;
 	height: 50px;
 	text-decoration: none;
@@ -115,31 +137,49 @@ body
 	width: inherit;
 }
 
+#player_team_helmet
+{
+	float: left;
+	min-width: 10vw;
+}
+
+#player_team_helmet_img
+{
+}
+
 #player_name
 {
 	float: left;
-	font-size: 28px;
-	width: 50%;
+	font-size: 45px;
+	min-width: 20vw;
+	padding-top: 10px;
+	padding-left: 5vw;
 }
 
 #player_number
 {
-	float: left;
-	width: 10%;
+	float: right;
+	min-width: 10vw;
+	padding-top: 10px;
+	font-size: 45px;
 	color: gray;
 }
 
 #player_position
 {
-	float: left;
-	width: 10%;
+	float: right;
+	min-width: 10vw;
+	padding-top: 10px;
+	font-size: 45px;
 	color: gray;
 }
 
 #player_simple_score
 {
-	float: left;
-	width: 10%;
+	float: right;
+	min-width: 10vw;
+	padding-top: 10px;
+	font-size: 45px;
 	color: gray;
 }
 

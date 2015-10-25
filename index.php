@@ -19,36 +19,43 @@
         </div>
         <div id="main_content">
         	<div id="main_search">
-            	<a href="#menu" id="main_menu_toggle"><i class="fa fa-bars"></i></a>
+            	<div id="menu_toggle_wrapper">
+            		<a href="#menu" id="main_menu_toggle"><i class="fa fa-bars"></i></a>
+                </div>
                 <div id="search_bar">
-                	<input id="search_bar_input" name="search_input" type="text" placeholder="Search Fantasy Player"/>
+                	<input id="search_bar_input" name="search_input" type="text" placeholder="Search Fantasy Players"/>
                 </div>
             </div>
-            <div id="main_profile">
-            	<div id="profile_primary_stats">
-                    <div id="player_name">
-                    	Tom Brady
+            <div id="content_blocks">
+                <div class="content_block" id="main_profile">
+                    <div id="profile_primary_stats">
+                        <div id="player_team_helmet">
+                        	<img id="player_team_helmet_img" src="img/patriots.png"/>
+                        </div>
+                        <div id="player_name">
+                            Tom Brady
+                        </div>
+                        <div id="player_simple_score">
+                            7.12
+                        </div>
+                        <div id="player_position">
+                            QB
+                        </div>
+                        <div id="player_number">
+                            #12
+                        </div>
                     </div>
-                    <div id="player_number">
-                    	#12
+                    <div id="profile_secondary_stats">
                     </div>
-                    <div id="player_position">
-                    	QB
-                    </div>
-                    <div id="player_simple_score">
-                    	7.12
-                    </div>
-               	</div>
-                <div id="profile_secondary_stats">
                 </div>
-            </div>
-            <div id="fantasy_stats">
-            	<div id="fantasy_score_chart"></div>
-            </div>
-            <div id="real_stats">
-            </div>
-            <div id="schedule">
-            </div>
+                <div class="content_block" id="fantasy_stats">
+                    <div id="fantasy_score_chart"></div>
+                </div>
+                <div class="content_block" id="real_stats">
+                </div>
+                <div class="content_block" id="schedule">
+                </div>
+        	</div>
         </div>
     </div>
 </body>
