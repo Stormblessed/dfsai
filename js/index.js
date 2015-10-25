@@ -242,16 +242,39 @@ function makeChart(data, name)
 
 function getChartSeries(data)
 {
+	var maxPoints = getMaxPoints(data);
+	var percentage;
+	var points;
 	var array = [];
+	var rgb;
 	for(i=0; i < data.length; i++)
 	{
+		points = parseInt(data[i][2]);
+		percentage = 100 - (100 * (points / maxPoints));
+		if(points < 0)
+			percentage = 100;
+		rgb = ComputeRedToGreenRGB(percentage);
+
 		weekStr = data[i][0] + ", " + data[i][1];
 		dataObj = {
 			name:  weekStr, 
-			y: parseInt(data[i][2]),
-			fill: 'red'
+			y: points,
+			color: rgb
 		};
 		array.push (dataObj);
 	}
 	return array;
+}
+
+function getMaxPoints(data)
+{
+	var max = 0;
+	var curr;
+	for(i=0; i < data.length; i++)
+	{
+		curr = parseInt(data[i][2]);
+		if(curr > max)
+			max = curr;
+	}
+	return max;
 }
