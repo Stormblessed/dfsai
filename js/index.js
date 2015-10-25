@@ -23,7 +23,6 @@ $(document).ready(function()
 
 function LoadGeneratedRoster()
 {
-	console.log("HELLO");
 	request = $.ajax(
 	{
 		url: "ajax/getBestPlayerOfEachPosition.php",
@@ -32,8 +31,6 @@ function LoadGeneratedRoster()
 		
 	request.done(function(response, textStatus, jqXHR) 
 	{
-		console.log("hi");
-		console.log(response);
 		bestPlayers = HandleBestPlayerSelecting(response);
 		LoadSidebarRoster(bestPlayers);
 	});
@@ -46,13 +43,21 @@ function LoadGeneratedRoster()
 
 function HandleBestPlayerSelecting(sortedPlayers)
 {
+	var playerPosCounts = [];
+	playerPosCounts['QB'] = 1;
+	playerPosCounts['RB'] = 2;
+	playerPosCounts['WR'] = 3;
+	playerPosCounts['TE'] = 1;
+	playerPosCounts['PK'] = 1;
+	playerPosCounts['Def'] = 1;
 	var bestPlayers = [];
+	
 	for(i = 0; i < sortedPlayers.length; i++)
 	{
 		if(sortedPlayers[i].length < 1) continue;
-		for(j = 0; j < num; j++)
+		for(j = 0; j < playerPosCounts[sortedPlayers[i][0]]; j++)
 		{
-			bestPlayers.push(sortedPlayers[i][j]);
+			bestPlayers.push(sortedPlayers[i][1][j]);
 		}
 	}
 	return bestPlayers;
@@ -63,7 +68,8 @@ function LoadSidebarRoster(bestPlayers)
 	for(i = 0; i < bestPlayers.length; i++)
 	{
 		var html = $("#main_menu_roster").html();
-		$("#main_menu_roster").html(html + bestPlayers[i]['name'] + "<br/>");
+		var entry = '<a href="#" class="roster_entry" data-gid="' + bestPlayers[i]['gid'] + '" data-name="' + bestPlayers[i]['name'] + '">'+bestPlayers[i]['name']+'</a>';
+		$("#main_menu_roster").append(entry);
 	}
 }
 
@@ -97,6 +103,18 @@ function LoadPlayerSuggestionsList()
 		console.error("The following error occured: " + textStatus, errorThrown);
 	});
 }
+
+$('#main_menu_roster').on('click', 'a', function()
+{
+	console.log("HI");
+	var name = $(this).data('name');
+	var gid = $(this).data('gid');
+	$("#search_bar_input").val(name);
+	$("#search_bar_suggestions").hide();
+	
+	LoadPlayerData(gid);
+	GlobalSuggestionLoaded = true;
+});
 
 $('#search_bar_suggestions').on('click', 'a', function()
 {
