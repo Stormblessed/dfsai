@@ -167,8 +167,9 @@ function getPlayerData(gid, name)
 			});
 			
 	request.done(function (response, textStatus, jqXHR) {
-	data = getRecentData(response);
-	makeChart(data, name);
+	data = getRecentData(response[0]);
+	expected = parseInt(response[1]);
+	makeChart(data, name, expected);
 	});
 	
 	request.fail(function (jqXHR, textStatus, errorThrown){
@@ -191,7 +192,7 @@ function getRecentData(allData)
 	return allData.slice(first,allData.length);
 }
 
-function makeChart(data, name)
+function makeChart(data, name, expected)
 {
 	var titleString = "Points and Salary for " + name + " by Week";
 	$('#fantasy_score_chart').highcharts({
@@ -252,7 +253,7 @@ function makeChart(data, name)
 			color: "rgba(0,255,0,1)",
 			type: 'column',
 			colorByPoint: false,
-			data: getPlayerPointsSeries(data),
+			data: getPlayerPointsSeries(data, expected),
 			dataLabels: {
 				enabled: true,
 				format: '{point.y}'
@@ -280,14 +281,15 @@ function makeChart(data, name)
 	});
 }
 
-function getPlayerPointsSeries(data)
+function getPlayerPointsSeries(data, expected)
 {
 	var maxPoints = getMaxPoints(data);
 	var percentage;
 	var points;
 	var array = [];
 	var rgb;
-	for(i=0; i < data.length; i++)
+	var dataObj;
+	for(i=0; i < data.length - 1; i++)
 	{
 		points = parseInt(data[i][2]);
 		percentage = 100 - (100 * (points / maxPoints));
@@ -303,6 +305,19 @@ function getPlayerPointsSeries(data)
 		};
 		array.push (dataObj);
 	}
+	points = expected;
+	percentage = 100 - (100 * (points / maxPoints));
+	if(points < 0)
+		percentage = 100;
+	rgb = ComputeRedToGreenRGB(percentage);
+
+	weekStr = data[i][0] + ", " + data[i][1];
+	dataObj = {
+		name:  weekStr, 
+		y: points,
+		color: rgb
+	};
+	array.push (dataObj);
 	return array;
 }
 
