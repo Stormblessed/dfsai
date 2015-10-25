@@ -192,7 +192,7 @@ body
 	width: 100%;
 	position: absolute;
 	left: 0;
-	margin-top: 125px;
+	margin-top: 129px;
 	overflow: hidden;
 }
 
@@ -202,7 +202,10 @@ body
 	text-decoration: none;
 	color: inherit;
 	width: 100%;
-	font-size: 35px;
+	min-height: 3.5vh;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-size: 40px;
 	display: inline-block;
 	padding-left: 10.5vw;
 	background-color: #EEEEEE;
@@ -246,22 +249,22 @@ body
 
 #player_team_helmet_img
 {
-	width: 3.5vw;
+	width: 45px;
 }
 
 #player_name
 {
 	float: left;
-	font-size: 45px;
+	font-size: 35px;
 	padding-left: 2vw;
 }
 
 #player_position
 {
 	float: left;
-	font-size: 35px;
+	font-size: 25px;
 	color: gray;
-	margin-top: 8px;
+	margin-top: 10px;
 	margin-left: 3px;
 }
 
@@ -269,16 +272,16 @@ body
 {
 	float: right;
 	min-width: 10vw;
-	font-size: 45px;
+	font-size: 35px;
 	color: gray;
 	padding-right: 15px;
 }
 
 .player_stat_name
 {
-	font-size: 35px;
+	font-size: 25px;
 	float: right;
-	margin-top: 8px;
+	margin-top: 10px;
 }
 
 .player_stat_data

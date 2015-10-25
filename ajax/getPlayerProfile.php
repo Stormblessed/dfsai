@@ -13,13 +13,5 @@ $data = mysql_query(
  
 $entry = mysql_fetch_array($data);
 
-$splitName = explode(", ", $entry['name']);
-$reorderedName = "";
-for($j = sizeof($splitName)-1; $j >= 0; $j--)
-{
-	$reorderedName .= $splitName[$j] . " ";
-}
-$entry['name'] = $reorderedName;
-
 echo json_encode($entry);
 ?>

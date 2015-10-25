@@ -60,6 +60,16 @@
 		
 		$gid = $currentPlayer['gid'];
 		$name = $currentPlayer['name'];
+		
+		$splitName = explode(", ", $name);
+		$reorderedName = "";
+		for($j = sizeof($splitName)-1; $j >= 0; $j--)
+		{
+			if($j == 0) $reorderedName .= $splitName[$j];
+			else $reorderedName .= $splitName[$j] . " ";
+		}
+		$name = $reorderedName;
+		
 		$position = $currentPlayer['position'];
 		$team = $currentPlayer['team'];
 		
@@ -67,10 +77,11 @@
 		mysql_query("INSERT INTO $playersTable (gid, name, number, position, team, weeks, averagePoints, stdDevPoints, simpleScore) 
 					 VALUES ('$gid', '$name', 'N/A', '$position', '$team', '$totalWeeks', '$averagePoints', '$stdDev', '$simpleScore')
 					 ON DUPLICATE KEY UPDATE 
+					 	name = '$name',
 					 	weeks = '$totalWeeks',
 					 	averagePoints = '$averagePoints',
 						stdDevPoints = '$stdDev',
 						simpleScore = '$simpleScore'");
-		echo "Computed ".$currentPlayer['name']." stats. <br/>";
+		echo "Computed ".$name." stats. <br/>";
 	}
 ?>

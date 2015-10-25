@@ -1,10 +1,13 @@
 // JavaScript Document
 
+var GlobalSuggestionLoaded = false;
 $(document).ready(function()
 {
 	$("#search_bar_input").keyup(function()
 	{
-		LoadPlayerSuggestionsList();
+		GlobalSuggestionLoaded = false;
+		if($('#search_bar_input').val().length > 3) LoadPlayerSuggestionsList();
+		else $("#search_bar_suggestions").hide();
 	});
 });
 
@@ -25,8 +28,11 @@ function LoadPlayerSuggestionsList()
 		
 	request.done(function(response, textStatus, jqXHR) 
 	{
-		$("#search_bar_suggestions").show();
-		$("#search_bar_suggestions").html(response);
+		if(!GlobalSuggestionLoaded)
+		{
+			$("#search_bar_suggestions").show();
+			$("#search_bar_suggestions").html(response);
+		}
 		$("#search_bar_input").css("background", "none");
 	});
 	
@@ -44,6 +50,7 @@ $('#search_bar_suggestions').on('click', 'a', function()
 	$("#search_bar_suggestions").hide();
 	
 	LoadPlayerData(gid);
+	GlobalSuggestionLoaded = true;
 });
 
 function LoadPlayerData(gid)
