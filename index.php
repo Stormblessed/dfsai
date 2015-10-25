@@ -61,6 +61,7 @@
 </body>
 
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="//code.highcharts.com/highcharts.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
 
 </html>
