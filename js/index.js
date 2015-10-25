@@ -193,10 +193,9 @@ function getRecentData(allData)
 
 function makeChart(data, name)
 {
-	var titleString = "Points Scored by " + name + " by Week";
+	var titleString = "Points and Salary for " + name + " by Week";
 	$('#fantasy_score_chart').highcharts({
 		chart: {
-			type: 'column',
 			backgroundColor: 'transparent'
 		},
 		title: {
@@ -209,7 +208,7 @@ function makeChart(data, name)
 			},
 			gridLineColor: 'transparent'
 		},
-		yAxis: {
+		yAxis: [{
 			gridLineColor: 'transparent',
 			labels: {
 				enabled: false
@@ -217,35 +216,71 @@ function makeChart(data, name)
 			title: {
 				enabled: false
 			}
-		},
+		}, {
+			gridLineColor: 'transparent',
+			title: {
+				text: "Weekly Salary",
+				enabled: false
+			},
+			labels: {
+				enabled: false
+			},
+			opposite: true
+		}],
 		legend: {
 			enabled: false
 		},
 		plotOptions: {
 			series: {
-				borderWidth: 0,
-				dataLabels: {
-					enabled: true,
-					format: '{point.y}'
-				}
+				borderWidth: 0
 			}
 		},
 
 		tooltip: {
-			headerFormat: '{series.name}: <br>',
-			pointFormat: '{point.y}'
+			shared: false
 		},
-
+		legend: {
+            layout: 'vertical',
+            align: 'right',
+            x: 0,
+            verticalAlign: 'top',
+            y: 0,
+            floating: true
+        },
 		series: [{
 			name: "Weekly Points",
+			color: "rgba(0,255,0,1)",
+			type: 'column',
 			colorByPoint: false,
-			data: getChartSeries(data)
+			data: getPlayerPointsSeries(data),
+			dataLabels: {
+				enabled: true,
+				format: '{point.y}'
+				},
+			tooltip: {
+				headerFormat: '{series.name}: <br>',
+				pointFormat: '{point.y}'
+			}
+		}, {
+			name: "Weekly Salary",
+			type: 'spline',
+			color: "rgba(0,0,0,1)",
+			data: getPlayerSalarySeries(data),
+			dataLabels: {
+				enabled: true,
+				format: '${point.y}'
+			},
+			tooltip: {
+				headerFormat: '{series.name}: <br>',
+				pointFormat: '${point.y}'
+			},
+			yAxis: 1
 		}]
 
 	});
 }
 
-function getChartSeries(data)
+function getPlayerPointsSeries(data)
 {
 	var maxPoints = getMaxPoints(data);
 	var percentage;
@@ -265,6 +300,24 @@ function getChartSeries(data)
 			name:  weekStr, 
 			y: points,
 			color: rgb
+		};
+		array.push (dataObj);
+	}
+	return array;
+}
+
+function getPlayerSalarySeries(data)
+{
+	var salary;
+	var array = [];
+	for(i=0; i < data.length; i++)
+	{
+		salary = parseInt(data[i][3]);
+
+		weekStr = data[i][0] + ", " + data[i][1];
+		dataObj = {
+			name:  weekStr, 
+			y: salary
 		};
 		array.push (dataObj);
 	}
