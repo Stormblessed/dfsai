@@ -14,9 +14,9 @@
 </head>
 
 <body>
+	<div id="main_menu">
+    </div>
 	<div id="site">
-    	<div id="main_menu">
-        </div>
         <div id="main_content">
         	<div id="main_search">
             	<div id="menu_toggle_wrapper">
