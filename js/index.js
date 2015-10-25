@@ -78,8 +78,14 @@ function LoadPlayerProfile(gid)
 		$('#player_name').html(response['name']);
 		$('#player_position').html(response['position']);
 		$('#player_avg_points .player_stat_data').html(parseFloat(response['averagePoints']).toFixed(2));
+		$('#player_avg_points .player_stat_data').css("color", ComputeRedToGreenRGB(100 - ((response['averagePoints'] / response['maxAvgPoints']) * 100)));
+		console.log(response['maxAvgPoints']);
+		
 		$('#player_std_dev .player_stat_data').html(parseFloat(response['stdDevPoints']).toFixed(2));
+		$('#player_std_dev .player_stat_data').css("color", ComputeRedToGreenRGB(((response['stdDevPoints'] / response['maxStdDev']) * 100)));
+		
 		$('#player_simple_score .player_stat_data').html(parseFloat(response['simpleScore']).toFixed(2));
+		$('#player_simple_score .player_stat_data').css("color", ComputeRedToGreenRGB(100 - ((response['simpleScore'] / 3.5) * 100)));
 		
 		$('#main_profile').show();
 		$('#main_profile').animate({"width": "100%", "opacity": "1.0"}, 'slow');
@@ -122,6 +128,30 @@ function LoadPlayerSchedule(gid)
 	$('#schedule').animate({"width": "100%", "opacity": "1.0"}, 'slow');
 }
 
+function ComputeRedToGreenRGB(percent) 
+{
+    if (percent === 100) 
+	{
+        percent = 99
+    }
+    var r, g, b;
+
+    if (percent < 50) 
+	{
+        // green to yellow
+        r = Math.floor(255 * (percent / 50));
+        g = 255;
+    } 
+	else 
+	{
+        // yellow to red
+        r = 255;
+        g = Math.floor(255 * ((50 - percent % 50) / 50));
+    }
+    b = 0;
+
+    return "rgb(" + r + "," + g + "," + b + ")";
+}
 function getPlayerData(gid, name)
 {
 	request = $.ajax({

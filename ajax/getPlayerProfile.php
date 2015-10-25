@@ -13,5 +13,16 @@ $data = mysql_query(
  
 $entry = mysql_fetch_array($data);
 
+$maxData = mysql_query(
+			"SELECT 
+				MAX(averagePoints) as maxAvgPoints, MAX(stdDevpoints) as maxStdDev
+			 FROM 
+				$playersTable") or die(mysql_error());
+
+$maxEntry = mysql_fetch_array($maxData);
+
+$entry['maxAvgPoints'] = $maxEntry['maxAvgPoints'];
+$entry['maxStdDev'] = $maxEntry['maxStdDev'];
+
 echo json_encode($entry);
 ?>
