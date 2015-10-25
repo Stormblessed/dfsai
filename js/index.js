@@ -180,7 +180,7 @@ function getRecentData(allData)
 	var first;
 
 	if(allData.length < 12)
-		first = allData.length;
+		first = 0;
 	else
 		first = allData.length - 12;
 	return allData.slice(first,allData.length);
@@ -191,7 +191,8 @@ function makeChart(data, name)
 	var titleString = "Points Scored by " + name + " by Week";
 	$('#fantasy_score_chart').highcharts({
 		chart: {
-			type: 'column'
+			type: 'column',
+			backgroundColor: 'transparent'
 		},
 		title: {
 			text: titleString
@@ -200,11 +201,16 @@ function makeChart(data, name)
 			type: 'category',
 			title: {
 				text: 'Year, Week'
-			}
+			},
+			gridLineColor: 'transparent'
 		},
 		yAxis: {
+			gridLineColor: 'transparent',
+			labels: {
+				enabled: false
+			},
 			title: {
-				text: 'Points'
+				enabled: false
 			}
 		},
 		legend: {
@@ -242,7 +248,8 @@ function getChartSeries(data)
 		weekStr = data[i][0] + ", " + data[i][1];
 		dataObj = {
 			name:  weekStr, 
-			y: parseInt(data[i][2])
+			y: parseInt(data[i][2]),
+			fill: 'red'
 		};
 		array.push (dataObj);
 	}

@@ -305,11 +305,13 @@ body
 #fantasy_stats
 {
 	float: left;
+	width: 100%;
 }
 
 #fantasy_score_chart
 {
 	float: left;
+	width: 100%;
 }
 
 #real_stats
