@@ -1,8 +1,6 @@
 <?php
+	ini_set('max_execution_time', 4800);
 	require_once('connect.php');
-	
-	$CurrentYear = '2015';
-	$CurrentWeek = '6';
 	
 	$fantasyStatsTable = 'player_entries';
 	$data = mysql_query(
@@ -14,7 +12,7 @@
 	$gids = array();		
 	while($player = mysql_fetch_array($data))
 	{
-		$gids = $player['gid'];
+		$gids[] = $player['gid'];
 	}
 	array_unique($gids);
 	
@@ -25,6 +23,10 @@
 	
 	function ComputePlayerStats($gid)
 	{
+		$CurrentYear = '2015';
+		$CurrentWeek = '6';
+		
+		$fantasyStatsTable = 'player_entries';
 		$historicPlayerData = mysql_query("SELECT * FROM $fantasyStatsTable WHERE gid='$gid' AND year<='$CurrentYear' AND week<'$CurrentWeek'");
 		$currentPlayerData = mysql_query("SELECT * FROM $fantasyStatsTable WHERE gid='$gid' AND year='$CurrentYear' AND week='$CurrentWeek'");
 		
@@ -46,11 +48,27 @@
 			$totalVariance += $weeklyPoints[$i] - $averagePoints;
 		}
 		
-		$avgVariance = $totalVariance / ($totalWeeks - 1);
+		if($totalWeeks <= 1 || $totalWeeks == NULL) $avgVariance = 0;
+		else $avgVariance = $totalVariance / ($totalWeeks - 1);
 		$stdDev = sqrt($avgVariance);
 		
 		$currentPlayer = mysql_fetch_array($currentPlayerData);
 		$currentSalary = $currentPlayer['salary'];
-		$simpleScore = $averagePoints / $currentSalary;
+		if($currentSalary <= 0 || $currentSalary == NULL) $simpleScore = 0;
+		else $simpleScore = $averagePoints / $currentSalary;
+		
+		$gid = $currentPlayer['gid'];
+		$name = $currentPlayer['name'];
+		$position = $currentPlayer['position'];
+		$team = $currentPlayer['team'];
+		
+		$playersTable = 'players';
+		mysql_query("INSERT INTO $playersTable (gid, name, number, position, team, averagePoints, stdDevPoints, simpleScore) 
+					 VALUES ('$gid', '$name', 'N/A', '$position', '$team', '$averagePoints', '$stdDev', '$simpleScore')
+					 ON DUPLICATE KEY UPDATE 
+					 	averagePoints = '$averagePoints',
+						stdDevPoints = '$stdDev',
+						simpleScore = '$simpleScore'");
+		echo "Computed ".$currentPlayer['name']." stats. <br/>";
 	}
 ?>
