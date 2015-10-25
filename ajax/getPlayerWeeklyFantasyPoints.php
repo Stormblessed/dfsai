@@ -20,5 +20,5 @@ while($entry = mysql_fetch_array($data))
 	$weeklyData[] = $playerStats;
 }
 
-echo json_encode($weeklyData);
+echo $weeklyData;
 ?>
