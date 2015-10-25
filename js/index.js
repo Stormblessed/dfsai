@@ -160,7 +160,7 @@ function ComputeRedToGreenRGB(percent)
 function getPlayerData(gid, name)
 {
 	request = $.ajax({
-				url: "ajax/getPlayerWeeklyFantasyPoints.php",
+				url: "ajax/getPlayerWeeklyFantasyData.php",
 				type: "POST",
 				dataType: "json",
 				data: {"gid" : gid}
