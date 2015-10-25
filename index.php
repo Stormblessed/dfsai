@@ -16,6 +16,8 @@
 <body>
 	<div id="main_menu">
     	<a href="#" class="main_menu_tab">Generate Roster</a>
+        <div id="main_menu_roster">
+        </div>
     </div>
 	<div id="site">
         <div id="main_content">

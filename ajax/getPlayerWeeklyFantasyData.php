@@ -44,7 +44,7 @@ function GetExpectedPoints($gid, $year, $week)
 	$playersTable = 'players';
 	$data = mysql_query(
 			"SELECT 
-				name, position, team, weeks, averagePoints, stdDevPoints, simpleScore
+				name, position, team, weeks, averagePoints, stdDevPoints, averageSimpleScore
 			 FROM 
 				$playersTable
 			 WHERE gid='$gid'") or die(mysql_error());

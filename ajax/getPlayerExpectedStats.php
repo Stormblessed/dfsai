@@ -21,7 +21,7 @@ function GetExpectedPoints($gid, $year, $week)
 	$playersTable = 'players';
 	$data = mysql_query(
 			"SELECT 
-				name, position, team, weeks, averagePoints, stdDevPoints, simpleScore
+				name, position, team, weeks, averagePoints, stdDevPoints, averageSimpleScore
 			 FROM 
 				$playersTable
 			 WHERE gid='$gid'") or die(mysql_error());
@@ -57,7 +57,8 @@ function GetExpectedPointsDiffAgainstTeam($gid, $avgPoints, $opponent, $year, $w
 		$weeklyPoints[] = $entry['points'];
 		
 	}
-	$averagePointsAgainstTeam = $totalPoints / $totalWeeks;
+	if($totalWeeks > 0) $averagePointsAgainstTeam = $totalPoints / $totalWeeks;
+	else $averagePointsAgainstTeam = $avgPoints;
 	return $averagePointsAgainstTeam - $avgPoints;
 }
 
@@ -84,7 +85,8 @@ function GetExpectedPointsDiffPerLocation($gid, $avgPoints, $homeAway, $year, $w
 		$weeklyPoints[] = $entry['points'];
 		
 	}
-	$averagePointsInLocation = $totalPoints / $totalWeeks;
+	if($totalWeeks > 0) $averagePointsInLocation = $totalPoints / $totalWeeks;
+	else $averagePointsInLocation = $avgPoints;
 	return $averagePointsInLocation - $avgPoints;
 }
 

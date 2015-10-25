@@ -14,7 +14,58 @@ $(document).ready(function()
 	{
 		$("#site").toggleClass("pushed");
 	});
+	
+	$(".main_menu_tab").on("click", function()
+	{
+		LoadGeneratedRoster();
+	});
 });
+
+function LoadGeneratedRoster()
+{
+	console.log("HELLO");
+	request = $.ajax(
+	{
+		url: "ajax/getBestPlayerOfEachPosition.php",
+		dataType: "json"
+	});
+		
+	request.done(function(response, textStatus, jqXHR) 
+	{
+		console.log("hi");
+		console.log(response);
+		bestPlayers = HandleBestPlayerSelecting(response);
+		LoadSidebarRoster(bestPlayers);
+	});
+	
+	request.fail(function(jqXHR, textStatus, errorThrown)
+	{
+		console.error("The following error occured: " + textStatus, errorThrown);
+	});
+}
+
+function HandleBestPlayerSelecting(sortedPlayers)
+{
+	var bestPlayers = [];
+	for(i = 0; i < sortedPlayers.length; i++)
+	{
+		if(sortedPlayers[i].length < 1) continue;
+		for(j = 0; j < num; j++)
+		{
+			bestPlayers.push(sortedPlayers[i][j]);
+		}
+	}
+	return bestPlayers;
+}
+
+function LoadSidebarRoster(bestPlayers)
+{
+	for(i = 0; i < bestPlayers.length; i++)
+	{
+		var html = $("#main_menu_roster").html();
+		$("#main_menu_roster").html(html + bestPlayers[i]['name'] + "<br/>");
+	}
+}
 
 function LoadPlayerSuggestionsList()
 {
@@ -89,8 +140,8 @@ function LoadPlayerProfile(gid)
 		$('#player_std_dev .player_stat_data').html(parseFloat(response['stdDevPoints']).toFixed(2));
 		$('#player_std_dev .player_stat_data').css("color", ComputeRedToGreenRGB(((response['stdDevPoints'] / response['maxStdDev']) * 100)));
 		
-		$('#player_simple_score .player_stat_data').html(parseFloat(response['simpleScore']).toFixed(2));
-		$('#player_simple_score .player_stat_data').css("color", ComputeRedToGreenRGB(100 - ((response['simpleScore'] / 3.5) * 100)));
+		$('#player_simple_score .player_stat_data').html(parseFloat(response['averageSimpleScore']).toFixed(2));
+		$('#player_simple_score .player_stat_data').css("color", ComputeRedToGreenRGB(100 - ((response['averageSimpleScore'] / 3.5) * 100)));
 		
 		$('#main_profile').show();
 		$('#main_profile').animate({"width": "100%", "opacity": "1.0"}, 'slow');
