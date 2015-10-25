@@ -5,7 +5,7 @@ $gid = $_REQUEST['gid'];
 $fantasyStatsTable = 'player_entries';
 $data = mysql_query(
 			"SELECT 
-				year, week, points
+				year, week, points, salary
 			 FROM 
 				$fantasyStatsTable
 			 WHERE gid='$gid'") or die(mysql_error());
@@ -17,6 +17,7 @@ while($entry = mysql_fetch_array($data))
 	$playerStats[] = $entry['year'];
 	$playerStats[] = $entry['week'];
 	$playerStats[] = $entry['points'];
+	$playerStats[] = $entry['salary'];
 	$weeklyData[] = $playerStats;
 }
 
