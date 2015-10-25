@@ -1,5 +1,4 @@
 <?php
-
 require_once('../processes/connect.php');
 $gid = $_REQUEST['gid'];
 	

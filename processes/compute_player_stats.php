@@ -14,20 +14,21 @@
 	{
 		$gids[] = $player['gid'];
 	}
-	array_unique($gids);
+	$uniqueGids = array_unique($gids);
 	
-	for($i = 0; $i < sizeof($gids); $i++)
+	foreach($uniqueGids as $uniqueGid)
 	{
-		ComputePlayerStats($gids[$i]);
+		echo $uniqueGid . "<br/>";
+		ComputePlayerStats($uniqueGid);
 	}
 	
 	function ComputePlayerStats($gid)
 	{
-		$CurrentYear = '2015';
-		$CurrentWeek = '6';
+		$CurrentYear = 2015;
+		$CurrentWeek = 6;
 		
 		$fantasyStatsTable = 'player_entries';
-		$historicPlayerData = mysql_query("SELECT * FROM $fantasyStatsTable WHERE gid='$gid' AND year<='$CurrentYear' AND week<'$CurrentWeek'");
+		$historicPlayerData = mysql_query("SELECT * FROM $fantasyStatsTable WHERE (gid='$gid' AND year<'$CurrentYear') OR (gid='$gid' AND year='$CurrentYear' AND week<'$CurrentWeek')");
 		$currentPlayerData = mysql_query("SELECT * FROM $fantasyStatsTable WHERE gid='$gid' AND year='$CurrentYear' AND week='$CurrentWeek'");
 		
 		$totalPoints = 0;
@@ -45,7 +46,7 @@
 		$totalVariance = 0;
 		for($i = 0; $i < sizeof($weeklyPoints); $i++)
 		{
-			$totalVariance += $weeklyPoints[$i] - $averagePoints;
+			$totalVariance += ($weeklyPoints[$i] - $averagePoints) * ($weeklyPoints[$i] - $averagePoints);
 		}
 		
 		if($totalWeeks <= 1 || $totalWeeks == NULL) $avgVariance = 0;
@@ -55,7 +56,7 @@
 		$currentPlayer = mysql_fetch_array($currentPlayerData);
 		$currentSalary = $currentPlayer['salary'];
 		if($currentSalary <= 0 || $currentSalary == NULL) $simpleScore = 0;
-		else $simpleScore = $averagePoints / $currentSalary;
+		else $simpleScore = ($averagePoints / $currentSalary) * 1000;
 		
 		$gid = $currentPlayer['gid'];
 		$name = $currentPlayer['name'];
@@ -63,9 +64,10 @@
 		$team = $currentPlayer['team'];
 		
 		$playersTable = 'players';
-		mysql_query("INSERT INTO $playersTable (gid, name, number, position, team, averagePoints, stdDevPoints, simpleScore) 
-					 VALUES ('$gid', '$name', 'N/A', '$position', '$team', '$averagePoints', '$stdDev', '$simpleScore')
+		mysql_query("INSERT INTO $playersTable (gid, name, number, position, team, weeks, averagePoints, stdDevPoints, simpleScore) 
+					 VALUES ('$gid', '$name', 'N/A', '$position', '$team', '$totalWeeks', '$averagePoints', '$stdDev', '$simpleScore')
 					 ON DUPLICATE KEY UPDATE 
+					 	weeks = '$totalWeeks',
 					 	averagePoints = '$averagePoints',
 						stdDevPoints = '$stdDev',
 						simpleScore = '$simpleScore'");

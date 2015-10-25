@@ -18,14 +18,47 @@ body
 #site
 {
 	float: left;
-	width: 100%;
-	height: 100%;
+	width: 100vw;
+	height: 100vh;
+	background-color: #EEEEEE;
 }
 
 #main_menu
 {
-	float: left;
 	display: none;
+	display: none;
+	background-color: #454545;
+}
+
+#logo_container
+{
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	-moz-user-select: none; 
+	-khtml-user-select: none; 
+	-webkit-user-select: none; 
+	-o-user-select: none; 
+	pointer-events: none;
+}
+
+#logo
+{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 92px;
+}
+
+#logo_start
+{
+	color: #FF666A;
+}
+
+#logo_end
+{
+	color: #333;
 }
 
 #main_content
@@ -43,12 +76,41 @@ body
 
 .content_block
 {
-	width: 100%;
+	float: left;
+	width: 0%;
+	opacity: 0.0;
+	display: none;
 	min-height: 2vh;
-	background-color: #EBEBEB;
 	margin-top: 1vh;
 	margin-bottom: 1vh;
-	border-radius: 15px;
+	background-color: white;
+}
+
+.content_block_header
+{
+	float: left;
+	background-color: #969BA0;
+	color: #EDEEEF;
+	width: 100%;
+	font-size: 24px;
+	padding: 10px;
+	margin-left: -10px;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+}
+
+.content_block_main
+{
+	float: left;
+	width: 100%;
+	background-color: #F5F5F5;
+	padding: 10px;
+	margin-left: -10px;
+	-moz-box-shadow:    0px 3px 2px 0px #ccc;
+  	-webkit-box-shadow: 0px 3px 2px 0px #ccc;
+  	box-shadow:         0px 3px 2px 0px #ccc;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
 }
 
 #main_search
@@ -59,6 +121,10 @@ body
 	border-bottom: 1px solid #999;
 	opacity: 0.7;
 	display: table;
+	-moz-box-shadow:    0px 3px 2px 0px #ccc;
+  	-webkit-box-shadow: 0px 3px 2px 0px #ccc;
+  	box-shadow:         0px 3px 2px 0px #ccc;
+	margin-bottom: 15px;
 }
 
 #menu_toggle_wrapper
@@ -119,6 +185,40 @@ body
 	outline: none;
 }
 
+#search_bar_suggestions
+{
+	z-index: 100;
+	float: left;
+	width: 100%;
+	position: absolute;
+	left: 0;
+	margin-top: 125px;
+}
+
+.player_suggestion_item
+{
+	z-index: 100;
+	text-decoration: none;
+	color: inherit;
+	width: 100%;
+	font-size: 35px;
+	display: inline-block;
+	padding-left: 10.5vw;
+	background-color: #EEEEEE;
+}
+
+.player_suggestion_item:hover
+{
+	color: #CCC;
+	background-color: #666;
+}
+
+.player_suggestion_item:active
+{
+	color: #FFF;
+	background-color: #555;
+}
+
 #main_profile
 {
 	float: left;
@@ -140,47 +240,62 @@ body
 #player_team_helmet
 {
 	float: left;
-	min-width: 10vw;
+	padding-left: 15px;
 }
 
 #player_team_helmet_img
 {
+	width: 3.5vw;
 }
 
 #player_name
 {
 	float: left;
 	font-size: 45px;
-	min-width: 20vw;
-	padding-top: 10px;
-	padding-left: 5vw;
-}
-
-#player_number
-{
-	float: right;
-	min-width: 10vw;
-	padding-top: 10px;
-	font-size: 45px;
-	color: gray;
+	padding-left: 2vw;
 }
 
 #player_position
 {
+	float: left;
+	font-size: 35px;
+	color: gray;
+	margin-top: 8px;
+	margin-left: 3px;
+}
+
+.player_stat
+{
 	float: right;
 	min-width: 10vw;
-	padding-top: 10px;
 	font-size: 45px;
 	color: gray;
+	padding-right: 15px;
+}
+
+.player_stat_name
+{
+	font-size: 35px;
+	float: right;
+	margin-top: 8px;
+}
+
+.player_stat_data
+{
+	float: right;
+	color: #3A3A3A;
+}
+
+#player_average_points
+{
+}
+
+#player_std_dev
+{
 }
 
 #player_simple_score
 {
-	float: right;
-	min-width: 10vw;
-	padding-top: 10px;
-	font-size: 45px;
-	color: gray;
 }
 
 #fantasy_stats
