@@ -168,7 +168,7 @@ function getPlayerData(gid, name)
 			
 	request.done(function (response, textStatus, jqXHR) {
 	data = getRecentData(response[0]);
-	expected = parseInt(response[1]);
+	expected = Number(parseFloat(response[1]).toFixed(2));
 	makeChart(data, name, expected);
 	});
 	
@@ -256,11 +256,11 @@ function makeChart(data, name, expected)
 			data: getPlayerPointsSeries(data, expected),
 			dataLabels: {
 				enabled: true,
-				format: '{point.y}'
+				format: '{point.y:.2f}'
 				},
 			tooltip: {
 				headerFormat: '{series.name}: <br>',
-				pointFormat: '{point.y}'
+				pointFormat: '{point.name}: {point.y}'
 			}
 		}, {
 			name: "Weekly Salary",
@@ -291,7 +291,7 @@ function getPlayerPointsSeries(data, expected)
 	var dataObj;
 	for(i=0; i < data.length - 1; i++)
 	{
-		points = parseInt(data[i][2]);
+		points = parseFloat(data[i][2]);
 		percentage = 100 - (100 * (points / maxPoints));
 		if(points < 0)
 			percentage = 100;
@@ -306,12 +306,8 @@ function getPlayerPointsSeries(data, expected)
 		array.push (dataObj);
 	}
 	points = expected;
-	percentage = 100 - (100 * (points / maxPoints));
-	if(points < 0)
-		percentage = 100;
-	rgb = ComputeRedToGreenRGB(percentage);
-
-	weekStr = data[i][0] + ", " + data[i][1];
+	rgb = "rgba(124,205,247,1)";
+	weekStr = "Expected Points";
 	dataObj = {
 		name:  weekStr, 
 		y: points,
