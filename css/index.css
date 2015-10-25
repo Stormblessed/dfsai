@@ -193,6 +193,7 @@ body
 	position: absolute;
 	left: 0;
 	margin-top: 125px;
+	overflow: hidden;
 }
 
 .player_suggestion_item
